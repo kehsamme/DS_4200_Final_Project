@@ -56,7 +56,7 @@ app.layout = html.Div([
         value='Population',  # Default color scale
         style={'width': '200px', 'fontFamily': 'Montserrat'}
     ),
-    dcc.Graph(id='population-choropleth-graph'),  # Adding an ID to the graph
+    dcc.Graph(id='population-choropleth-graph', style={'width': '100vw', 'height': '100vh'}),
     dcc.Checklist(
         id='checkboxes',
         options=[
@@ -74,7 +74,7 @@ app.layout = html.Div([
         inline=True,
     ),
     dcc.Graph(
-        id='choropleth-map',
+        id='choropleth-map', style={'width': '100vw', 'height': '100vh'}
     )
 ])
 
