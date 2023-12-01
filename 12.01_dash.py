@@ -73,7 +73,7 @@ app.layout = html.Div([
         ),
     ], style={'marginTop': '40px'}),
     html.Div([
-        dcc.Graph(id='stacked-bar-chart', style={'marginTop': '20px', 'width': '100vw', 'marginLeft': '20px'})
+        dcc.Graph(id='stacked-bar-chart', style={'marginTop': '100px', 'width': '100vw', 'marginLeft': '20px'})
     ], style={'marginLeft': '20px'}),
     html.Div([html.H2("Remote Patient Monitoring Insurance Coverage, CPT: 99454", style={'marginLeft': '40px', 'fontFamily': 'Montserrat', 'fontSize': '20px'}),], style={'marginLeft': '20px'}),
     html.Div([dcc.Checklist(
