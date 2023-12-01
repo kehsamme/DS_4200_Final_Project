@@ -19,7 +19,7 @@ def generate_fig(demographic):
         hover_name='States',  # Hover show state names
         height=600,
         color_continuous_scale='Blues',  # Use selected color scale
-        title='Asthma Prevalence in the United States',
+        # title='Asthma Prevalence in the United States',
     )
 
     fig.update_coloraxes(colorbar=dict(title='Population Count'))
@@ -49,33 +49,17 @@ populations = {
 
 # Define the layout of the app with dropdown and graph
 app.layout = html.Div([
-    html.H1("Asthma Prevalence Dashboard", style={'fontFamily': 'Montserrat', 'fontSize': '36px', 'marginLeft': '20px'}),
-    dcc.Dropdown(
+    html.H1("Asthma Dashboard", style={'fontFamily': 'Montserrat', 'fontSize': '36px', 'marginLeft': '20px'}),
+    html.Div([html.H2("Asthma Prevalence in the United States", style={'marginLeft': '40px', 'fontFamily': 'Montserrat', 'fontSize': '20px'}),],
+             style={'marginTop': '40px'}),
+    html.Div([dcc.Dropdown(
         id='demographic-dropdown',
         options=populations,
         value='Population',  # Default color scale
         style={'width': '200px', 'fontFamily': 'Montserrat', 'marginLeft': '20px'}
     ),
+    ], style={'marginTop': '40px'}),
     dcc.Graph(id='population-choropleth-graph', style={'width': '100vw', 'height': '100vh', 'marginLeft': '20px'}),
-    dcc.Checklist(
-        id='checkboxes',
-        options=[
-            {'label': 'Medicare', 'value': '99454 Coverage: Medicare'},
-            {'label': 'Medicaid', 'value': '99454 Coverage: Medicaid'},
-            {'label': 'Top Private Insurance', 'value': '99454 Coverage: Top Private Insurance'},
-            {'label': 'Second Private Insurance', 'value': '99454 Coverage: Second Private Insurance'},
-        ],
-        value=['99454 Coverage: Medicare',
-               '99454 Coverage: Medicaid',
-               '99454 Coverage: Top Private Insurance',
-               '99454 Coverage: Second Private Insurance'
-        ],
-        style={'width': '150px', 'fontFamily': 'Montserrat', 'marginLeft': '50px'},
-        inline=True,
-    ),
-    dcc.Graph(
-        id='choropleth-map', style={'width': '100vw', 'height': '100vh'}
-    ),
     html.H2("Asthma Population by State", style={'marginLeft': '40px', 'fontFamily': 'Montserrat', 'fontSize': '20px'}),
     html.Div([
         dcc.Dropdown(
@@ -91,6 +75,27 @@ app.layout = html.Div([
     html.Div([
         dcc.Graph(id='stacked-bar-chart', style={'marginTop': '20px', 'width': '100vw', 'marginLeft': '20px'})
     ], style={'marginLeft': '20px'}),
+    html.Div([html.H2("Remote Patient Monitoring Insurance Coverage, CPT: 99454", style={'marginLeft': '40px', 'fontFamily': 'Montserrat', 'fontSize': '20px'}),], style={'marginLeft': '20px'}),
+    html.Div([dcc.Checklist(
+        id='checkboxes',
+        options=[
+            {'label': 'Medicare', 'value': '99454 Coverage: Medicare'},
+            {'label': 'Medicaid', 'value': '99454 Coverage: Medicaid'},
+            {'label': 'Top Private Insurance', 'value': '99454 Coverage: Top Private Insurance'},
+            {'label': 'Second Private Insurance', 'value': '99454 Coverage: Second Private Insurance'},
+        ],
+        value=['99454 Coverage: Medicare',
+               '99454 Coverage: Medicaid',
+               '99454 Coverage: Top Private Insurance',
+               '99454 Coverage: Second Private Insurance'
+        ],
+        style={'width': '150px', 'fontFamily': 'Montserrat', 'marginLeft': '50px'},
+        inline=True,
+    ),], style={'marginTop': '40px'}),
+    dcc.Graph(
+        id='choropleth-map', style={'width': '100vw', 'height': '100vh'}
+    ),
+
 ])
 
 
@@ -125,7 +130,7 @@ def update_choropleth(selected_checkboxes):
                         color=colors,
                         hover_name='State',
                         scope="usa",
-                        title='Remote Patient Monitoring Coverage, CPT: 99454',
+                        # title='Remote Patient Monitoring Coverage, CPT: 99454',
                         labels={'Sum': 'Selected Columns Sum'},
                         color_discrete_map={'#4575B4': '#4575B4', '#FFFFFF': '#FFFFFF'},  # Set discrete colors
                         )
@@ -133,6 +138,7 @@ def update_choropleth(selected_checkboxes):
     fig.update_traces(showlegend=False)
 
     return fig
+
 
 # Melt the DataFrame to have 'State' as a column and 'Adult' and 'Child' as values
 melted_df = pd.melt(df, id_vars=['US States'],
