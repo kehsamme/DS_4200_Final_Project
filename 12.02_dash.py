@@ -44,10 +44,39 @@ app = dash.Dash(__name__,external_stylesheets=[
     }
 ])
 
+# Define text blurbs
+graph_1 = """
+    Asthma varies in prevalence across the United States. 
+    Insurance Coverage of Remote Patient Monitoring(RPM) CPT 994595 also varies across states and public and private payers. 
+    Use this interactive choropleth map to explore asthma population and RPM coverage, to help draw conclusions for best initial market entry location.
+"""
+analysis_1 = """
+    Basic Analysis: The following states have promising opportunity as a point of entry.
+    In North Carolina the asthma population is 777k and RPM is covered by Medicare, Medicaid, the top private insurer, 
+    and the second private insurer. 
+    In New York the asthma population is 1.8M and RPM is covered by Medicare, Medicaid, and the top private insurer.
+    In Texas the asthma population is 2.15M and RPM is covered by Medicare, the top private insurer, 
+    and the second private insurer. In California the asthma population is 3.3M and RPM is covered by Medicare and Medicaid.
+"""
+
+graph_2 = """
+    Asthma affects both adults and children. These population vary across states. Use this interactive bar chart 
+    to compare states based on asthma population demographics.
+"""
+
+analysis_2 = """
+    Basic Analysis: California, Texas, and New York have the largest total asthma populations and decrease respectively. This is the same 
+    for the adult asthma population. For the child population Texas has the largest child asthma population, 
+    followed by California and New York.
+"""
+
 # Define content for Tab 1
 tab1_layout = html.Div([
-    html.H1("Asthma Dashboard", style={'fontFamily': 'Montserrat', 'fontSize': '36px', 'marginLeft': '20px'}),
-    html.H2("Asthma Prevalence and RPM Insurance Coverage",  style={'marginLeft': '40px', 'fontFamily': 'Montserrat', 'fontSize': '20px'}),
+    html.H1("Asthma Prevalence and RPM Insurance Coverage", style={'fontFamily': 'Montserrat', 'fontSize': '36px', 'marginLeft': '20px'}),
+    html.Div([
+        html.P(graph_1, style={'marginLeft': '40px', 'fontFamily': 'Montserrat'}),
+    ]),
+    # html.H2("Asthma Prevalence and RPM Insurance Coverage",  style={'marginLeft': '40px', 'fontFamily': 'Montserrat', 'fontSize': '20px'}),
     dcc.Checklist(
         id='checkboxes',
         options=[
@@ -61,17 +90,23 @@ tab1_layout = html.Div([
                '99454 Coverage: Top Private Insurance',
                '99454 Coverage: Second Private Insurance'
         ],
-        style={'width': '150px', 'fontFamily': 'Montserrat', 'marginLeft': '40px'},
+        style={'width': '800px', 'fontFamily': 'Montserrat', 'marginLeft': '40px', 'fontSize': '15px'},
         inline=True,
     ),
     dcc.Graph(
         id='choropleth-map', style={'width': '100vw', 'height': '100vh'}
     ),
+    html.Div([
+        html.P(analysis_1, style={'marginLeft': '40px', 'fontFamily': 'Montserrat'}),
+    ]),
 ])
 
 # Define content for Tab 2
 tab2_layout = html.Div([
     html.H1("Asthma Population by State", style={'fontFamily': 'Montserrat', 'fontSize': '36px', 'marginLeft': '20px'}),
+    html.Div([
+        html.P(graph_2, style={'marginLeft': '40px', 'fontFamily': 'Montserrat'}),
+    ]),
     # html.H2("Asthma Population by State",
     # style={'marginLeft': '40px', 'fontFamily': 'Montserrat', 'fontSize': '20px'}),
     html.Div([
@@ -87,7 +122,10 @@ tab2_layout = html.Div([
     ], style={'marginTop': '40px'}),
     html.Div([
         dcc.Graph(id='stacked-bar-chart', style={'marginTop': '100px', 'width': '100vw', 'marginLeft': '20px'})
-    ], style={'marginLeft': '20px'})
+    ], style={'marginLeft': '20px'}),
+    html.Div([
+        html.P(analysis_2, style={'marginLeft': '40px', 'fontFamily': 'Montserrat'}),
+    ]),
 ])
 
 # # Define the layout of the app with dropdown and graph
