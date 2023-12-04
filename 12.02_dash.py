@@ -23,7 +23,7 @@ app = dash.Dash(__name__,external_stylesheets=[
         'href': 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css',  # Bootstrap CSS
         'rel': 'stylesheet'
     }
-])
+], suppress_callback_exceptions=True)
 
 # Define text blurbs
 graph_1 = """
@@ -75,7 +75,7 @@ tab1_layout = html.Div([
         inline=True,
     ),
     dcc.Graph(
-        id='choropleth-map', style={'width': '100vw', 'height': '100vh'}
+        id='choropleth-map', style={'width': '100vw', 'height': '65vh'}
     ),
     html.Div([
         html.P(analysis_1, style={'marginLeft': '40px', 'fontFamily': 'Montserrat'}),
@@ -128,7 +128,8 @@ def update_choropleth(selected_checkboxes):
         scope="usa",
         # title='Remote Patient Monitoring Coverage, CPT: 99454',
         labels={'Sum': 'Selected Columns Sum'},
-        color_continuous_scale='Reds',
+        color_continuous_scale='Reds'
+
         )
 
     return fig
