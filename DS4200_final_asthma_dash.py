@@ -9,7 +9,7 @@ asthma_pop_df = pd.read_csv('clean_population_data.csv')
 coverage_df = pd.read_csv('coverage_df_clean.csv')
 df = pd.read_csv('Asthma RPM State Coverage.csv')
 
-# merger asthma population and insurance coverage data
+# merge asthma population and insurance coverage data
 combined_df = asthma_pop_df.merge(coverage_df, left_on='States', right_on='State')
 
 
@@ -110,7 +110,7 @@ tab2_layout = html.Div([
 ])
 
 
-# UPDATED !!!
+# UPDATED app callback
 @app.callback(
     Output('choropleth-map', 'figure'),
     [Input('checkboxes', 'value')]
