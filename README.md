@@ -1,5 +1,5 @@
-# DS_4200_Final_Project
-# Asthma Dashboard
+# DS4200 Final Project
+## Asthma Dashboard
 Two interactive visualizations
 ## 1. Choropleth map with checklist
     Vizualize asthma prevalence in respect to Remote Patient Monitoring coverage.
